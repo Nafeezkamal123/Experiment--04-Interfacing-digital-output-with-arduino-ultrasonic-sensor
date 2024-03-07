@@ -35,9 +35,10 @@ distance to an object = ((speed of sound in the air)*time)/2
 speed of sound in the air at 20ºC (68ºF) = 343m/s
 
 ### FIGURE 01 CIRCUIT OF INTERFACING ULTRASONIC SENSOR 
+![Screenshot 2024-03-07 111522](https://github.com/Nafeezkamal123/Experiment--04-Interfacing-digital-output-with-arduino-ultrasonic-sensor/assets/128898953/36c7ce81-20e0-4bbc-b4ab-eda735e80483)
+![Screenshot 2024-03-07 114423](https://github.com/Nafeezkamal123/Experiment--04-Interfacing-digital-output-with-arduino-ultrasonic-sensor/assets/128898953/a8c055d2-a04b-4949-8548-802c027ad44d)
 
 
-![image](https://user-images.githubusercontent.com/36288975/166430594-5adb4ca9-5a42-4781-a7e6-7236b3766a85.png)
 
 
 
@@ -56,7 +57,49 @@ speed of sound in the air at 20ºC (68ºF) = 343m/s
 
 ### PROGRAM 
 
+```uno
+const int trigpin=10;
+const int echopin=9;
+int red=7;
+int green=6;
+long duration;
+int distance;
 
+void setup()
+{
+  pinMode(trigpin,OUTPUT);
+  pinMode(echopin,INPUT);
+  pinMode(red,OUTPUT);
+  pinMode(green,OUTPUT);
+  Serial.begin(9600);
+}  
+void loop()
+{
+  digitalWrite(trigpin,LOW);
+  delay(20);
+  digitalWrite(trigpin,HIGH);
+  delay(20);
+  digitalWrite(trigpin,LOW);
+  duration=pulseIn(echopin,HIGH);
+  distance=duration*0.034/2;
+  Serial.print(distance);
+  Serial.println("cms");
+  if(distance>5)
+  {
+    digitalWrite(red,HIGH);
+    delay(200);
+    digitalWrite(red,LOW);
+    delay(200);
+  }
+  else{
+    
+    digitalWrite(green,HIGH);
+    delay(200);
+    digitalWrite(green,LOW);
+    delay(200);
+  }
+}
+```
 
 
 
@@ -69,7 +112,9 @@ speed of sound in the air at 20ºC (68ºF) = 343m/s
 			
 			
 
-![image](https://user-images.githubusercontent.com/36288975/190135379-52ebacd5-ccd5-460f-a4cd-4d0ad1d9b179.png)
+![Screenshot 2024-03-07 111557](https://github.com/Nafeezkamal123/Experiment--04-Interfacing-digital-output-with-arduino-ultrasonic-sensor/assets/128898953/48abfc1f-4ffd-4724-84c1-eb3a67b020de)
+![Screenshot 2024-03-07 111914](https://github.com/Nafeezkamal123/Experiment--04-Interfacing-digital-output-with-arduino-ultrasonic-sensor/assets/128898953/77bd3a2b-6f30-414b-8ef1-4e71bf2846fb)
+
 
 			
 			
@@ -78,6 +123,7 @@ speed of sound in the air at 20ºC (68ºF) = 343m/s
 			
 			Average error = sum/ number of readings 
  
+			Average Error = (0.28+0.7+3+2+3)/5 = 0.656
 
 
 
@@ -87,6 +133,7 @@ speed of sound in the air at 20ºC (68ºF) = 343m/s
 
 
 ### RESULTS
+Aurdino uno is interfaced with ultrasonic sensor and output value are indicated on a graph
 
 
 
